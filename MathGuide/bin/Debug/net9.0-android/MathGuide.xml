@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MathGuide</name>
+    </assembly>
+    <members>
+        <member name="T:MathGuide.Models.MathSection">
+            <summary>Крупная карточка раздела на странице «Правила».</summary>
+        </member>
+        <member name="P:MathGuide.Models.MathSection.Offset">
+            <summary>Сдвиг карточки влево/вправо — даёт «лесенку», как в макете.</summary>
+        </member>
+        <member name="T:MathGuide.Models.SectionChip">
+            <summary>Маленькая плитка раздела (сетка 2×2).</summary>
+        </member>
+        <member name="T:MathGuide.Models.RuleCard">
+            <summary>Карточка правила/темы в списке «Продолжить».</summary>
+        </member>
+        <member name="T:MathGuide.Models.GradeItem">
+            <summary>Класс школы (1–11) для горизонтальной ленты.</summary>
+        </member>
+        <member name="T:MathGuide.Models.FaqItem">
+            <summary>Часто задаваемый вопрос на странице калькулятора.</summary>
+        </member>
+        <member name="T:MathGuide.Models.SolutionResult">
+            <summary>Результат разбора задачи умным калькулятором.</summary>
+        </member>
+        <member name="T:MathGuide.Services.ISolverService">
+            <summary>
+            Умный калькулятор. Реализацию можно подменить: локальная модель,
+            собственный backend или облачный API распознавания формул.
+            </summary>
+        </member>
+        <member name="T:MathGuide.Services.DemoSolverService">
+            <summary>Заглушка для отладки интерфейса без сети.</summary>
+        </member>
+        <member name="T:MathGuide.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+    </members>
+</doc>

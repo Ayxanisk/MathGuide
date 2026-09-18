@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:m="clr-namespace:MathGuide.Models"
+             xmlns:vm="clr-namespace:MathGuide.ViewModels"
+             x:Class="MathGuide.Pages.RulesPage"
+             x:DataType="vm:RulesViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource PageBg}">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- ───── Шапка ───── -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,Auto"
+              ColumnSpacing="14" Padding="20,14,20,10">
+            <ImageButton Source="menu.png" HeightRequest="22" WidthRequest="22"
+                         BackgroundColor="Transparent" VerticalOptions="Center" />
+            <ImageButton Grid.Column="2" Source="bell.png" HeightRequest="22" WidthRequest="22"
+                         BackgroundColor="Transparent" VerticalOptions="Center" />
+            <Border Grid.Column="3" WidthRequest="36" HeightRequest="36"
+                    StrokeThickness="0" Padding="0" VerticalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <Image Source="avatar.png" Aspect="AspectFill" />
+            </Border>
+        </Grid>
+
+        <!-- ───── Карточки разделов ───── -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,8,20,28" Spacing="0"
+                                 BindableLayout.ItemsSource="{Binding Sections}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="m:MathSection">
+
+                        <Border Background="{Binding Background}" Margin="{Binding Offset}"
+                                StrokeThickness="0" Padding="0" HeightRequest="150">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="26" />
+                            </Border.StrokeShape>
+                            <Border.Shadow>
+                                <Shadow Brush="#16162B" Offset="0,10" Radius="22" Opacity="0.18" />
+                            </Border.Shadow>
+
+                            <Grid IsClippedToBounds="True">
+                                <!-- Декоративные круги -->
+                                <Ellipse Fill="#FFFFFF" Opacity="0.10"
+                                         WidthRequest="150" HeightRequest="150"
+                                         HorizontalOptions="End" VerticalOptions="Start"
+                                         Margin="0,-40,-30,0" />
+                                <Ellipse Fill="#FFFFFF" Opacity="0.07"
+                                         WidthRequest="96" HeightRequest="96"
+                                         HorizontalOptions="End" VerticalOptions="End"
+                                         Margin="0,0,30,-26" />
+
+                                <!-- Текст -->
+                                <VerticalStackLayout Padding="24,0" Spacing="6" VerticalOptions="Center">
+                                    <Label Text="{Binding Subtitle}" FontSize="12"
+                                           TextColor="#F0EDFF" Opacity="0.85" />
+                                    <Label Text="{Binding Title}" FontSize="27" FontAttributes="Bold"
+                                           TextColor="{StaticResource TextOnPrimary}" />
+                                    <Label Text="{Binding RuleCount, StringFormat='{0} правил и формул'}"
+                                           FontSize="12.5" TextColor="#F0EDFF" Opacity="0.85" />
+                                </VerticalStackLayout>
+                            </Grid>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSectionTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

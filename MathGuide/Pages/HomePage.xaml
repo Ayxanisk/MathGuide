@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:m="clr-namespace:MathGuide.Models"
+             xmlns:vm="clr-namespace:MathGuide.ViewModels"
+             x:Class="MathGuide.Pages.HomePage"
+             x:DataType="vm:HomeViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource PageBg}">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- ───── Шапка ───── -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,Auto"
+              ColumnSpacing="14" Padding="20,14,20,10">
+
+            <ImageButton Source="menu.png" HeightRequest="22" WidthRequest="22"
+                         BackgroundColor="Transparent" VerticalOptions="Center" />
+
+            <Grid Grid.Column="2" VerticalOptions="Center">
+                <ImageButton Source="bell.png" HeightRequest="22" WidthRequest="22"
+                             BackgroundColor="Transparent" />
+                <Ellipse Fill="{StaticResource Accent}" WidthRequest="7" HeightRequest="7"
+                         HorizontalOptions="End" VerticalOptions="Start" Margin="0,1,1,0" />
+            </Grid>
+
+            <Border Grid.Column="3" WidthRequest="36" HeightRequest="36"
+                    StrokeThickness="0" Padding="0" VerticalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <Image Source="avatar.png" Aspect="AspectFill" />
+            </Border>
+        </Grid>
+
+        <!-- ───── Содержимое ───── -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,4,20,28" Spacing="24">
+
+                <!-- Приветствие -->
+                <VerticalStackLayout Spacing="3">
+                    <Label Style="{StaticResource H1}" Text="{Binding UserName, StringFormat='Привет, {0}!'}" />
+                    <HorizontalStackLayout Spacing="4">
+                        <Label Style="{StaticResource Caption}" FontSize="13" Text="На этой неделе добавлено" />
+                        <Label FontSize="13" FontAttributes="Bold" TextColor="{StaticResource Accent}"
+                               Text="{Binding NewTopicsCount, StringFormat='{0} новых тем'}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- Карточка баллов -->
+                <Border StrokeThickness="0"
+                        Background="{StaticResource GradIndigo}" Padding="20,18">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="22" />
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Brush="#4F5BD5" Offset="0,10" Radius="20" Opacity="0.28" />
+                    </Border.Shadow>
+
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="10">
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="{Binding Points}" FontSize="36" FontAttributes="Bold"
+                                   TextColor="{StaticResource TextOnPrimary}" />
+                            <Label Text="баллов" FontSize="13" VerticalOptions="End" Margin="0,0,0,8"
+                                   TextColor="{StaticResource TextOnPrimaryMuted}" />
+                        </HorizontalStackLayout>
+
+                        <Border Grid.Column="1" BackgroundColor="{StaticResource Surface}"
+                                StrokeThickness="0" Padding="16,9" VerticalOptions="Start">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                            <Label Text="Решать" FontSize="13" FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}" />
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSolveTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+
+                        <Label Grid.Row="1" Grid.ColumnSpan="2" FontSize="12" LineHeight="1.35"
+                               TextColor="{StaticResource TextOnPrimaryMuted}"
+                               Text="{Binding WeeklyGoal, StringFormat='Набери {0} баллов за неделю — откроется разбор задач с репетитором'}" />
+                    </Grid>
+                </Border>
+
+                <!-- Продолжить изучение -->
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Style="{StaticResource SectionTitle}" Text="Продолжить изучение" />
+                        <Label Grid.Column="1" FontSize="13" TextColor="{StaticResource Primary}"
+                               Text="Все темы" VerticalOptions="Center" />
+                    </Grid>
+
+                    <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween"
+                                BindableLayout.ItemsSource="{Binding ContinueList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="m:RuleCard">
+                                <Border Style="{StaticResource Card}" FlexLayout.Basis="48%" Margin="0,0,0,12">
+                                    <VerticalStackLayout Spacing="9">
+                                        <Label Text="{Binding Title}" FontSize="13.5" FontAttributes="Bold"
+                                               LineHeight="1.25" MaxLines="2" LineBreakMode="TailTruncation"
+                                               TextColor="{StaticResource TextPrimary}" />
+
+                                        <Border BackgroundColor="{StaticResource SurfaceMuted}"
+                                                StrokeThickness="0" Padding="8,3" HorizontalOptions="Start">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="6" />
+                                            </Border.StrokeShape>
+                                            <Label Text="{Binding Section}" FontSize="10.5" FontAttributes="Bold"
+                                                   TextColor="{Binding SectionColor}" />
+                                        </Border>
+
+                                        <ProgressBar Progress="{Binding Progress}"
+                                                     ProgressColor="{StaticResource Primary}"
+                                                     BackgroundColor="{StaticResource SurfaceMuted}" />
+
+                                        <HorizontalStackLayout Spacing="5">
+                                            <Image Source="clock.png" WidthRequest="12" HeightRequest="12"
+                                                   VerticalOptions="Center" />
+                                            <Label Text="{Binding Meta}" Style="{StaticResource Caption}"
+                                                   FontSize="10.5" VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+                <!-- Разделы -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Style="{StaticResource SectionTitle}" Text="Разделы" />
+
+                    <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween"
+                                BindableLayout.ItemsSource="{Binding Sections}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="m:SectionChip">
+                                <Border Style="{StaticResource Tile}" Background="{Binding Background}"
+                                        FlexLayout.Basis="48%" Margin="0,0,0,12" HeightRequest="66">
+                                    <Label Text="{Binding Title}" FontSize="14.5" FontAttributes="Bold"
+                                           TextColor="{StaticResource TextOnPrimary}"
+                                           VerticalOptions="Center" />
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+                <!-- Классы 1–11 -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Style="{StaticResource SectionTitle}" Text="Класс" />
+
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <HorizontalStackLayout Spacing="9" Padding="0,2,0,6"
+                                               BindableLayout.ItemsSource="{Binding Grades}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="m:GradeItem">
+                                    <Border WidthRequest="46" HeightRequest="46" Padding="0"
+                                            StrokeThickness="1" Stroke="{StaticResource Stroke}"
+                                            BackgroundColor="{Binding Background}">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="13" />
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding Label}" FontSize="15" FontAttributes="Bold"
+                                               TextColor="{Binding TextColor}"
+                                               HorizontalOptions="Center" VerticalOptions="Center" />
+                                    </Border>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </HorizontalStackLayout>
+                    </ScrollView>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- ===== Базовая палитра (снята с макета) ===== -->
+    <Color x:Key="Primary">#4F5BD5</Color>
+    <Color x:Key="PrimaryLight">#7B5BE8</Color>
+    <Color x:Key="PageBg">#F5F5F9</Color>
+    <Color x:Key="Surface">#FFFFFF</Color>
+    <Color x:Key="SurfaceMuted">#EFEFF6</Color>
+    <Color x:Key="Stroke">#E7E7F0</Color>
+
+    <Color x:Key="TextPrimary">#16162B</Color>
+    <Color x:Key="TextSecondary">#5A5A75</Color>
+    <Color x:Key="TextMuted">#8A8AA3</Color>
+    <Color x:Key="TextOnPrimary">#FFFFFF</Color>
+    <Color x:Key="TextOnPrimaryMuted">#D6D3FA</Color>
+
+    <Color x:Key="Accent">#F0453C</Color>
+    <Color x:Key="AccentSoft">#FF7A5C</Color>
+    <Color x:Key="Magenta">#B93EC9</Color>
+    <Color x:Key="Gold">#CFA96E</Color>
+    <Color x:Key="Teal">#2AA7A0</Color>
+
+    <!-- ===== Градиенты для карточек разделов ===== -->
+    <LinearGradientBrush x:Key="GradIndigo" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#4F5BD5" Offset="0" />
+        <GradientStop Color="#7B5BE8" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GradFire" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#F0453C" Offset="0" />
+        <GradientStop Color="#FF8A4B" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GradMagenta" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#9B2FC9" Offset="0" />
+        <GradientStop Color="#D2379B" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GradGold" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#D9B57C" Offset="0" />
+        <GradientStop Color="#C09257" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GradTeal" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#2AA7A0" Offset="0" />
+        <GradientStop Color="#3FC9A3" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GradNight" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#3B2D8F" Offset="0" />
+        <GradientStop Color="#6A3FC0" Offset="1" />
+    </LinearGradientBrush>
+
+</ResourceDictionary>
