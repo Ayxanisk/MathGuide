@@ -12,23 +12,30 @@
 
         <!-- ───── Шапка ───── -->
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,Auto"
-              ColumnSpacing="14" Padding="20,14,20,10">
+              ColumnSpacing="12" Padding="20,14,20,10">
 
-            <ImageButton Source="menu.png" HeightRequest="22" WidthRequest="22"
-                         BackgroundColor="Transparent" VerticalOptions="Center" />
-
-            <Grid Grid.Column="2" VerticalOptions="Center">
-                <ImageButton Source="bell.png" HeightRequest="22" WidthRequest="22"
+            <Border Style="{StaticResource HeaderIconChip}">
+                <ImageButton Source="menu.png" HeightRequest="18" WidthRequest="18"
                              BackgroundColor="Transparent" />
-                <Ellipse Fill="{StaticResource Accent}" WidthRequest="7" HeightRequest="7"
-                         HorizontalOptions="End" VerticalOptions="Start" Margin="0,1,1,0" />
-            </Grid>
+            </Border>
 
-            <Border Grid.Column="3" WidthRequest="36" HeightRequest="36"
+            <Border Grid.Column="2" Style="{StaticResource HeaderIconChip}">
+                <Grid>
+                    <ImageButton Source="bell.png" HeightRequest="18" WidthRequest="18"
+                                 BackgroundColor="Transparent" />
+                    <Ellipse Fill="{StaticResource Accent}" WidthRequest="8" HeightRequest="8"
+                             HorizontalOptions="End" VerticalOptions="Start" Margin="0,4,4,0" />
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="3" WidthRequest="38" HeightRequest="38"
                     StrokeThickness="0" Padding="0" VerticalOptions="Center">
                 <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
+                    <RoundRectangle CornerRadius="19" />
                 </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="#16162B" Offset="0,3" Radius="8" Opacity="0.10" />
+                </Border.Shadow>
                 <Image Source="avatar.png" Aspect="AspectFill" />
             </Border>
         </Grid>
@@ -51,7 +58,7 @@
                 <Border StrokeThickness="0"
                         Background="{StaticResource GradIndigo}" Padding="20,18">
                     <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="22" />
+                        <RoundRectangle CornerRadius="{StaticResource RadiusXL}" />
                     </Border.StrokeShape>
                     <Border.Shadow>
                         <Shadow Brush="#4F5BD5" Offset="0,10" Radius="20" Opacity="0.28" />
@@ -65,13 +72,12 @@
                                    TextColor="{StaticResource TextOnPrimaryMuted}" />
                         </HorizontalStackLayout>
 
-                        <Border Grid.Column="1" BackgroundColor="{StaticResource Surface}"
-                                StrokeThickness="0" Padding="16,9" VerticalOptions="Start">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10" />
-                            </Border.StrokeShape>
-                            <Label Text="Решать" FontSize="13" FontAttributes="Bold"
-                                   TextColor="{StaticResource Primary}" />
+                        <Border Grid.Column="1" Style="{StaticResource BadgePill}" VerticalOptions="Start">
+                            <HorizontalStackLayout Spacing="6">
+                                <Label Text="Решать" FontSize="13" FontAttributes="Bold"
+                                       TextColor="{StaticResource Primary}" VerticalOptions="Center" />
+                                <Label Style="{StaticResource ArrowGlyph}" TextColor="{StaticResource Primary}" />
+                            </HorizontalStackLayout>
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnSolveTapped" />
                             </Border.GestureRecognizers>
@@ -87,8 +93,12 @@
                 <VerticalStackLayout Spacing="12">
                     <Grid ColumnDefinitions="*,Auto">
                         <Label Style="{StaticResource SectionTitle}" Text="Продолжить изучение" />
-                        <Label Grid.Column="1" FontSize="13" TextColor="{StaticResource Primary}"
-                               Text="Все темы" VerticalOptions="Center" />
+                        <HorizontalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                            <Label FontSize="13" FontAttributes="Bold" TextColor="{StaticResource Primary}"
+                                   Text="Все темы" VerticalOptions="Center" />
+                            <Label Style="{StaticResource ArrowGlyph}" FontSize="12"
+                                   TextColor="{StaticResource Primary}" />
+                        </HorizontalStackLayout>
                     </Grid>
 
                     <FlexLayout Wrap="Wrap" JustifyContent="SpaceBetween"
@@ -101,11 +111,7 @@
                                                LineHeight="1.25" MaxLines="2" LineBreakMode="TailTruncation"
                                                TextColor="{StaticResource TextPrimary}" />
 
-                                        <Border BackgroundColor="{StaticResource SurfaceMuted}"
-                                                StrokeThickness="0" Padding="8,3" HorizontalOptions="Start">
-                                            <Border.StrokeShape>
-                                                <RoundRectangle CornerRadius="6" />
-                                            </Border.StrokeShape>
+                                        <Border Style="{StaticResource Chip}">
                                             <Label Text="{Binding Section}" FontSize="10.5" FontAttributes="Bold"
                                                    TextColor="{Binding SectionColor}" />
                                         </Border>
@@ -136,10 +142,15 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="m:SectionChip">
                                 <Border Style="{StaticResource Tile}" Background="{Binding Background}"
-                                        FlexLayout.Basis="48%" Margin="0,0,0,12" HeightRequest="66">
-                                    <Label Text="{Binding Title}" FontSize="14.5" FontAttributes="Bold"
-                                           TextColor="{StaticResource TextOnPrimary}"
-                                           VerticalOptions="Center" />
+                                        FlexLayout.Basis="48%" Margin="0,0,0,12" HeightRequest="66"
+                                        Padding="14,0">
+                                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                        <Image Source="book_white.png" WidthRequest="18" HeightRequest="18"
+                                               Opacity="0.9" />
+                                        <Label Text="{Binding Title}" FontSize="14" FontAttributes="Bold"
+                                               TextColor="{StaticResource TextOnPrimary}"
+                                               VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
                                 </Border>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
@@ -159,8 +170,11 @@
                                             StrokeThickness="1" Stroke="{StaticResource Stroke}"
                                             BackgroundColor="{Binding Background}">
                                         <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="13" />
+                                            <RoundRectangle CornerRadius="23" />
                                         </Border.StrokeShape>
+                                        <Border.Shadow>
+                                            <Shadow Brush="#16162B" Offset="0,3" Radius="8" Opacity="0.06" />
+                                        </Border.Shadow>
                                         <Label Text="{Binding Label}" FontSize="15" FontAttributes="Bold"
                                                TextColor="{Binding TextColor}"
                                                HorizontalOptions="Center" VerticalOptions="Center" />

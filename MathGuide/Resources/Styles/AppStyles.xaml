@@ -2,6 +2,24 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!-- ===== Шкала скруглений — единая для всего приложения ===== -->
+    <x:Double x:Key="RadiusXS">8</x:Double>
+    <!-- маленькие теги/чипы -->
+    <x:Double x:Key="RadiusS">16</x:Double>
+    <!-- поля ввода -->
+    <x:Double x:Key="RadiusM">18</x:Double>
+    <!-- карточки, плитки -->
+    <x:Double x:Key="RadiusL">24</x:Double>
+    <!-- кнопки-пилюли -->
+    <x:Double x:Key="RadiusXL">28</x:Double>
+    <!-- крупные карточки разделов -->
+
+    <!-- ===== Общие тени ===== -->
+    <Shadow x:Key="CardShadow" Brush="#1A1A2E" Offset="0,6" Radius="18" Opacity="0.06" />
+    <Shadow x:Key="TileShadow" Brush="#1A1A2E" Offset="0,8" Radius="16" Opacity="0.14" />
+    <Shadow x:Key="PrimaryButtonShadow" Brush="#4F5BD5" Offset="0,8" Radius="16" Opacity="0.30" />
+    <Shadow x:Key="SoftShadow" Brush="#1A1A2E" Offset="0,3" Radius="8" Opacity="0.05" />
+
     <!-- ===== Типографика ===== -->
     <Style x:Key="H1" TargetType="Label">
         <Setter Property="FontSize" Value="24" />
@@ -20,6 +38,14 @@
         <Setter Property="TextColor" Value="{StaticResource TextMuted}" />
     </Style>
 
+    <!-- Стрелка-глиф для кнопок и карточек — без картинок, цвет задаётся на месте -->
+    <Style x:Key="ArrowGlyph" TargetType="Label">
+        <Setter Property="Text" Value="→" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
     <!-- ===== Белая карточка ===== -->
     <Style x:Key="Card" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
@@ -28,14 +54,10 @@
         <Setter Property="Padding" Value="14" />
         <Setter Property="StrokeShape">
             <Setter.Value>
-                <RoundRectangle CornerRadius="16" />
+                <RoundRectangle CornerRadius="{StaticResource RadiusM}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Shadow">
-            <Setter.Value>
-                <Shadow Brush="#1A1A2E" Offset="0,6" Radius="18" Opacity="0.06" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Shadow" Value="{StaticResource CardShadow}" />
     </Style>
 
     <!-- ===== Цветная плитка раздела ===== -->
@@ -45,7 +67,76 @@
         <Setter Property="HeightRequest" Value="74" />
         <Setter Property="StrokeShape">
             <Setter.Value>
-                <RoundRectangle CornerRadius="14" />
+                <RoundRectangle CornerRadius="{StaticResource RadiusM}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Shadow" Value="{StaticResource TileShadow}" />
+    </Style>
+
+    <!-- ===== Маленький тег-чип (например категория темы) ===== -->
+    <Style x:Key="Chip" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource SurfaceMuted}" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Padding" Value="9,4" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="{StaticResource RadiusXS}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ===== Круглая иконка-кнопка в шапке (меню, колокольчик) ===== -->
+    <Style x:Key="HeaderIconChip" TargetType="Border">
+        <Setter Property="WidthRequest" Value="38" />
+        <Setter Property="HeightRequest" Value="38" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SurfaceMuted}" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="19" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ===== Основная кнопка-пилюля (заливка градиентом) ===== -->
+    <Style x:Key="PrimaryButton" TargetType="Border">
+        <Setter Property="HeightRequest" Value="52" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Background" Value="{StaticResource GradIndigo}" />
+        <Setter Property="Shadow" Value="{StaticResource PrimaryButtonShadow}" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="{StaticResource RadiusL}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ===== Второстепенная кнопка-пилюля (контур) ===== -->
+    <Style x:Key="SecondaryButton" TargetType="Border">
+        <Setter Property="HeightRequest" Value="52" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+        <Setter Property="Stroke" Value="{StaticResource Primary}" />
+        <Setter Property="StrokeThickness" Value="1.5" />
+        <Setter Property="Shadow" Value="{StaticResource SoftShadow}" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="{StaticResource RadiusL}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ===== Маленькая пилюля-бейдж (например «Решать») ===== -->
+    <Style x:Key="BadgePill" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Padding" Value="16,10" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="18" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -55,10 +146,11 @@
         <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
         <Setter Property="Stroke" Value="{StaticResource Primary}" />
         <Setter Property="StrokeThickness" Value="1.5" />
-        <Setter Property="Padding" Value="14,4,8,4" />
+        <Setter Property="Padding" Value="16,6,6,6" />
+        <Setter Property="Shadow" Value="{StaticResource SoftShadow}" />
         <Setter Property="StrokeShape">
             <Setter.Value>
-                <RoundRectangle CornerRadius="12" />
+                <RoundRectangle CornerRadius="{StaticResource RadiusS}" />
             </Setter.Value>
         </Setter>
     </Style>
