@@ -10,16 +10,27 @@
 
         <!-- ───── Шапка ───── -->
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,Auto"
-              ColumnSpacing="14" Padding="20,14,20,10">
-            <ImageButton Source="menu.png" HeightRequest="22" WidthRequest="22"
-                         BackgroundColor="Transparent" VerticalOptions="Center" />
-            <ImageButton Grid.Column="2" Source="bell.png" HeightRequest="22" WidthRequest="22"
-                         BackgroundColor="Transparent" VerticalOptions="Center" />
-            <Border Grid.Column="3" WidthRequest="36" HeightRequest="36"
+              ColumnSpacing="12" Padding="20,14,20,10">
+            <Border Style="{StaticResource HeaderIconChip}">
+                <ImageButton Source="menu.png" HeightRequest="18" WidthRequest="18"
+                             BackgroundColor="Transparent" />
+            </Border>
+            <Border Grid.Column="2" Style="{StaticResource HeaderIconChip}">
+                <Grid>
+                    <ImageButton Source="bell.png" HeightRequest="18" WidthRequest="18"
+                                 BackgroundColor="Transparent" />
+                    <Ellipse Fill="{StaticResource Accent}" WidthRequest="8" HeightRequest="8"
+                             HorizontalOptions="End" VerticalOptions="Start" Margin="0,4,4,0" />
+                </Grid>
+            </Border>
+            <Border Grid.Column="3" WidthRequest="38" HeightRequest="38"
                     StrokeThickness="0" Padding="0" VerticalOptions="Center">
                 <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="18" />
+                    <RoundRectangle CornerRadius="19" />
                 </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="#16162B" Offset="0,3" Radius="8" Opacity="0.10" />
+                </Border.Shadow>
                 <Image Source="avatar.png" Aspect="AspectFill" />
             </Border>
         </Grid>
@@ -34,37 +45,37 @@
                 <Border Style="{StaticResource QuestionField}">
                     <Grid ColumnDefinitions="*,Auto">
                         <Entry x:Name="QuestionEntry" Placeholder="Например: 5x − 8 = 2x + 4"
-                               ReturnType="Send" Completed="OnSolveText" />
-                        <ImageButton Grid.Column="1" Source="camera.png"
-                                     WidthRequest="24" HeightRequest="24" Padding="8"
-                                     BackgroundColor="Transparent" Clicked="OnTakePhoto" />
+                               ReturnType="Send" Completed="OnSolveText" VerticalOptions="Center" />
+                        <Border Grid.Column="1" WidthRequest="34" HeightRequest="34" Padding="0"
+                                BackgroundColor="{StaticResource SurfaceMuted}" StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="17" />
+                            </Border.StrokeShape>
+                            <ImageButton Source="camera.png" WidthRequest="17" HeightRequest="17"
+                                         BackgroundColor="Transparent" Clicked="OnTakePhoto" />
+                        </Border>
                     </Grid>
                 </Border>
 
                 <!-- Две главные кнопки -->
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                    <Border Background="{StaticResource GradIndigo}" StrokeThickness="0" Padding="0"
-                            HeightRequest="48">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="13" />
-                        </Border.StrokeShape>
-                        <Label Text="Сфотографировать" FontSize="13.5" FontAttributes="Bold"
-                               TextColor="{StaticResource TextOnPrimary}"
-                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Border Style="{StaticResource PrimaryButton}">
+                        <HorizontalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="camera_white.png" WidthRequest="18" HeightRequest="18" />
+                            <Label Text="Сфотографировать" FontSize="13.5" FontAttributes="Bold"
+                                   TextColor="{StaticResource TextOnPrimary}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnTakePhoto" />
                         </Border.GestureRecognizers>
                     </Border>
 
-                    <Border Grid.Column="1" BackgroundColor="{StaticResource Surface}"
-                            Stroke="{StaticResource Stroke}" StrokeThickness="1"
-                            Padding="0" HeightRequest="48">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="13" />
-                        </Border.StrokeShape>
-                        <Label Text="Выбрать из галереи" FontSize="13.5" FontAttributes="Bold"
-                               TextColor="{StaticResource Primary}"
-                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Border Grid.Column="1" Style="{StaticResource SecondaryButton}">
+                        <HorizontalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="gallery.png" WidthRequest="18" HeightRequest="18" />
+                            <Label Text="Из галереи" FontSize="13.5" FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnPickPhoto" />
                         </Border.GestureRecognizers>
@@ -96,25 +107,37 @@
                     <Label Style="{StaticResource SectionTitle}" Text="Разделы" />
                     <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto"
                           ColumnSpacing="12" RowSpacing="12">
-                        <Border Style="{StaticResource Tile}" HeightRequest="56"
+                        <Border Style="{StaticResource Tile}" HeightRequest="56" Padding="14,0"
                                 Background="{StaticResource GradIndigo}">
-                            <Label Text="Уравнения" FontSize="14" FontAttributes="Bold"
-                                   TextColor="White" VerticalOptions="Center" />
+                            <HorizontalStackLayout Spacing="9" VerticalOptions="Center">
+                                <Image Source="book_white.png" WidthRequest="16" HeightRequest="16" Opacity="0.9" />
+                                <Label Text="Уравнения" FontSize="14" FontAttributes="Bold"
+                                       TextColor="White" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
                         </Border>
-                        <Border Grid.Column="1" Style="{StaticResource Tile}" HeightRequest="56"
+                        <Border Grid.Column="1" Style="{StaticResource Tile}" HeightRequest="56" Padding="14,0"
                                 Background="{StaticResource GradFire}">
-                            <Label Text="Дроби" FontSize="14" FontAttributes="Bold"
-                                   TextColor="White" VerticalOptions="Center" />
+                            <HorizontalStackLayout Spacing="9" VerticalOptions="Center">
+                                <Image Source="book_white.png" WidthRequest="16" HeightRequest="16" Opacity="0.9" />
+                                <Label Text="Дроби" FontSize="14" FontAttributes="Bold"
+                                       TextColor="White" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
                         </Border>
-                        <Border Grid.Row="1" Style="{StaticResource Tile}" HeightRequest="56"
+                        <Border Grid.Row="1" Style="{StaticResource Tile}" HeightRequest="56" Padding="14,0"
                                 Background="{StaticResource GradMagenta}">
-                            <Label Text="Геометрия" FontSize="14" FontAttributes="Bold"
-                                   TextColor="White" VerticalOptions="Center" />
+                            <HorizontalStackLayout Spacing="9" VerticalOptions="Center">
+                                <Image Source="book_white.png" WidthRequest="16" HeightRequest="16" Opacity="0.9" />
+                                <Label Text="Геометрия" FontSize="14" FontAttributes="Bold"
+                                       TextColor="White" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
                         </Border>
-                        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Tile}" HeightRequest="56"
+                        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Tile}" HeightRequest="56" Padding="14,0"
                                 Background="{StaticResource GradGold}">
-                            <Label Text="Проценты" FontSize="14" FontAttributes="Bold"
-                                   TextColor="White" VerticalOptions="Center" />
+                            <HorizontalStackLayout Spacing="9" VerticalOptions="Center">
+                                <Image Source="book_white.png" WidthRequest="16" HeightRequest="16" Opacity="0.9" />
+                                <Label Text="Проценты" FontSize="14" FontAttributes="Bold"
+                                       TextColor="White" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
                         </Border>
                     </Grid>
                 </VerticalStackLayout>
