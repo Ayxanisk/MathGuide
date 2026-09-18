@@ -19,7 +19,7 @@
 
             <Grid Grid.Column="2" VerticalOptions="Center">
                 <ImageButton Source="bell.png" HeightRequest="22" WidthRequest="22"
-                             BackgroundColor="Teal" />
+                             BackgroundColor="Transparent" />
                 <Ellipse Fill="{StaticResource Accent}" WidthRequest="7" HeightRequest="7"
                          HorizontalOptions="End" VerticalOptions="Start" Margin="0,1,1,0" />
             </Grid>
