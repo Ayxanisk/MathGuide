@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MathGuide.Pages.ProfilePage"
+             BackgroundColor="{StaticResource PageBg}">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid Grid.Row="0" Padding="20,16,20,0">
+            <Border Style="{StaticResource HeaderIconChip}" HorizontalOptions="Start">
+                <Label Text="✕" FontSize="16" FontAttributes="Bold"
+                       TextColor="{StaticResource TextPrimary}"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCloseTapped" />
+                </Border.GestureRecognizers>
+            </Border>
+            <Label Text="Профиль" Style="{StaticResource SectionTitle}"
+                   HorizontalOptions="Center" VerticalOptions="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24,18,24,32" Spacing="22">
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Border WidthRequest="104" HeightRequest="104" StrokeThickness="0"
+                            Padding="0" BackgroundColor="{StaticResource Surface}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="52" />
+                        </Border.StrokeShape>
+                        <Image x:Name="AvatarImage" Aspect="AspectFill" />
+                    </Border>
+                    <Label Text="Изменить изображение" FontSize="13" FontAttributes="Bold"
+                           TextColor="{StaticResource Primary}" HorizontalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnChangeAvatarTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </VerticalStackLayout>
+
+                <Border Style="{StaticResource Card}" Padding="18">
+                    <VerticalStackLayout Spacing="14">
+                        <Label Text="Личные данные" Style="{StaticResource SectionTitle}" />
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Имя" Style="{StaticResource FieldLabel}" />
+                            <Border Style="{StaticResource FormField}">
+                                <Entry x:Name="NameEntry" Placeholder="Твоё имя" />
+                            </Border>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Email" Style="{StaticResource FieldLabel}" />
+                            <Border Style="{StaticResource FormField}">
+                                <Entry x:Name="EmailEntry" Placeholder="you@example.com" Keyboard="Email" />
+                            </Border>
+                        </VerticalStackLayout>
+                        <Border Style="{StaticResource PrimaryButton}">
+                            <Label Text="Сохранить данные" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{StaticResource TextOnPrimary}"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSaveProfileTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource Card}" Padding="18">
+                    <VerticalStackLayout Spacing="14">
+                        <Label Text="Безопасность" Style="{StaticResource SectionTitle}" />
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Новый пароль" Style="{StaticResource FieldLabel}" />
+                            <Border Style="{StaticResource FormField}">
+                                <Entry x:Name="PasswordEntry" Placeholder="Минимум 6 символов" IsPassword="True" />
+                            </Border>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Повтори пароль" Style="{StaticResource FieldLabel}" />
+                            <Border Style="{StaticResource FormField}">
+                                <Entry x:Name="ConfirmPasswordEntry" Placeholder="Ещё раз" IsPassword="True" />
+                            </Border>
+                        </VerticalStackLayout>
+                        <Border Style="{StaticResource SecondaryButton}">
+                            <Label Text="Изменить пароль" FontSize="14" FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnChangePasswordTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource SecondaryButton}" Stroke="{StaticResource Accent}">
+                    <Label Text="Выйти из аккаунта" FontSize="14" FontAttributes="Bold"
+                           TextColor="{StaticResource Accent}"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLogoutTapped" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

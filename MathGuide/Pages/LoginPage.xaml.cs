@@ -1,3 +1,5 @@
+using MathGuide.Services;
+
 namespace MathGuide.Pages;
 
 public partial class LoginPage : ContentPage
@@ -18,9 +20,10 @@ public partial class LoginPage : ContentPage
             return;
         }
 
-        // Здесь позже: реальный запрос к backend авторизации.
+        UserSession.SignIn(login, login);
         await DisplayAlert("Вход выполнен", $"Демо-вход: {login}", "Отлично");
         await Navigation.PopModalAsync();
+        await Navigation.PushModalAsync(new ProfilePage());
     }
 
     private async void OnGuestTapped(object sender, TappedEventArgs e)

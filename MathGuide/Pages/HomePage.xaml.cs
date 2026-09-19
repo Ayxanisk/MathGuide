@@ -1,4 +1,5 @@
-﻿using MathGuide.ViewModels;
+using MathGuide.Services;
+using MathGuide.ViewModels;
 
 namespace MathGuide.Pages;
 
@@ -14,5 +15,10 @@ public partial class HomePage : ContentPage
         => await Shell.Current.GoToAsync("//calc");
 
     private async void OnProfileTapped(object sender, TappedEventArgs e)
-        => await Navigation.PushModalAsync(new LoginPage());
+    {
+        if (UserSession.IsAuthenticated)
+            await Navigation.PushModalAsync(new ProfilePage());
+        else
+            await Navigation.PushModalAsync(new LoginPage());
+    }
 }

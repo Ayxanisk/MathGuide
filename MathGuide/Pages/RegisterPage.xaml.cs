@@ -1,3 +1,5 @@
+using MathGuide.Services;
+
 namespace MathGuide.Pages;
 
 public partial class RegisterPage : ContentPage
@@ -26,12 +28,14 @@ public partial class RegisterPage : ContentPage
             return;
         }
 
-        // Здесь позже: реальный запрос на регистрацию к backend.
+        UserSession.SignIn(name, contact);
+        await UserSession.SetPasswordAsync(password);
         await DisplayAlert("Готово", $"Демо-регистрация: {name}", "Отлично");
 
         // Закрываем и регистрацию, и страницу входа под ней — возвращаемся в приложение.
         await Navigation.PopModalAsync();
         await Navigation.PopModalAsync();
+        await Navigation.PushModalAsync(new ProfilePage());
     }
 
     private async void OnBackToLoginTapped(object sender, TappedEventArgs e)
