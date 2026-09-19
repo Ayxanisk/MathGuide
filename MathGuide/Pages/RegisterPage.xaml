@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MathGuide.Pages.RegisterPage"
+             BackgroundColor="{StaticResource PageBg}">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Закрыть -->
+        <Grid Grid.Row="0" Padding="20,16,20,0">
+            <Border Style="{StaticResource HeaderIconChip}" HorizontalOptions="Start">
+                <Label Text="✕" FontSize="16" FontAttributes="Bold"
+                       TextColor="{StaticResource TextPrimary}"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnCloseTapped" />
+                </Border.GestureRecognizers>
+            </Border>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24,8,24,32" Spacing="26">
+
+                <!-- Баннер -->
+                <Border StrokeThickness="0" Background="{StaticResource GradFire}"
+                        Padding="24,0" HeightRequest="150">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="{StaticResource RadiusXL}" />
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Brush="#F0453C" Offset="0,10" Radius="20" Opacity="0.22" />
+                    </Border.Shadow>
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="6">
+                        <Label Text="Создать аккаунт" FontSize="22" FontAttributes="Bold"
+                               TextColor="{StaticResource TextOnPrimary}" />
+                        <Label Text="Это займёт меньше минуты"
+                               FontSize="13" TextColor="{StaticResource TextOnPrimaryMuted}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Форма -->
+                <VerticalStackLayout Spacing="14">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Имя" FontSize="12.5" FontAttributes="Bold"
+                               TextColor="{StaticResource TextSecondary}" />
+                        <Border Style="{StaticResource FormField}">
+                            <Entry x:Name="NameEntry" Placeholder="Как тебя зовут?" VerticalOptions="Center" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Email или телефон" FontSize="12.5" FontAttributes="Bold"
+                               TextColor="{StaticResource TextSecondary}" />
+                        <Border Style="{StaticResource FormField}">
+                            <Entry x:Name="ContactEntry" Placeholder="you@example.com"
+                                   Keyboard="Email" VerticalOptions="Center" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Пароль" FontSize="12.5" FontAttributes="Bold"
+                               TextColor="{StaticResource TextSecondary}" />
+                        <Border Style="{StaticResource FormField}">
+                            <Entry x:Name="PasswordEntry" Placeholder="Минимум 6 символов"
+                                   IsPassword="True" VerticalOptions="Center" />
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Повтори пароль" FontSize="12.5" FontAttributes="Bold"
+                               TextColor="{StaticResource TextSecondary}" />
+                        <Border Style="{StaticResource FormField}">
+                            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Ещё раз"
+                                   IsPassword="True" VerticalOptions="Center" />
+                        </Border>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <Border Style="{StaticResource PrimaryButton}" Background="{StaticResource GradFire}">
+                    <Label Text="Зарегистрироваться" FontSize="15" FontAttributes="Bold"
+                           TextColor="{StaticResource TextOnPrimary}"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRegisterTapped" />
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <!-- Ссылка на вход -->
+                <HorizontalStackLayout Spacing="4" HorizontalOptions="Center">
+                    <Label Text="Уже есть аккаунт?" FontSize="13" TextColor="{StaticResource TextSecondary}" />
+                    <Label Text="Войти" FontSize="13" FontAttributes="Bold"
+                           TextColor="{StaticResource Primary}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackToLoginTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

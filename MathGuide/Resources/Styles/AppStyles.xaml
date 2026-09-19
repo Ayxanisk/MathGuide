@@ -141,6 +141,20 @@
         </Setter>
     </Style>
 
+    <!-- ===== Обычное поле формы (логин, регистрация) ===== -->
+    <Style x:Key="FormField" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+        <Setter Property="Stroke" Value="{StaticResource Stroke}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Padding" Value="16,2" />
+        <Setter Property="HeightRequest" Value="52" />
+        <Setter Property="Shadow" Value="{StaticResource SoftShadow}" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="{StaticResource RadiusS}" />
+            </Setter.Value>
+        </Setter>
+    </Style>
     <!-- ===== Поле ввода вопроса ===== -->
     <Style x:Key="QuestionField" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
@@ -154,6 +168,15 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- ===== Подпись над полем формы ===== -->
+    <Style x:Key="FieldLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+    </Style>
+
+
 
     <Style TargetType="Entry">
         <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />

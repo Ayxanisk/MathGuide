@@ -52,6 +52,9 @@ public partial class CalculatorPage : ContentPage
         await HandlePhotoAsync(photo);
     }
 
+    private async void OnProfileTapped(object sender, TappedEventArgs e)
+        => await Navigation.PushModalAsync(new LoginPage());
+
     private async Task HandlePhotoAsync(FileResult? photo)
     {
         if (photo is null)
