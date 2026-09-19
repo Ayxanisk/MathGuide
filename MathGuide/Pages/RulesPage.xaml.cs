@@ -15,7 +15,11 @@ public partial class RulesPage : ContentPage
     {
         if (sender is Border { BindingContext: MathSection section })
         {
+            // Здесь позже: Shell.Current.GoToAsync($"topics?section={section.Title}");
             await DisplayAlert(section.Title, $"{section.RuleCount} правил · {section.Subtitle}", "Закрыть");
         }
     }
+
+    private async void OnProfileTapped(object sender, TappedEventArgs e)
+        => await Navigation.PushModalAsync(new LoginPage());
 }

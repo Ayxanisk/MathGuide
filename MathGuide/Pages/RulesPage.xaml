@@ -34,6 +34,9 @@
                     <Shadow Brush="#16162B" Offset="0,3" Radius="8" Opacity="0.10" />
                 </Border.Shadow>
                 <Image Source="avatar.png" Aspect="AspectFill" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnProfileTapped" />
+                </Border.GestureRecognizers>
             </Border>
         </Grid>
 
