@@ -15,8 +15,7 @@ public partial class RulesPage : ContentPage
     {
         if (sender is Border { BindingContext: MathSection section })
         {
-            // Здесь позже: Shell.Current.GoToAsync($"topics?section={section.Title}");
-            await DisplayAlert(section.Title, $"{section.RuleCount} правил · {section.Subtitle}", "Закрыть");
+            await Navigation.PushModalAsync(new RulesListPage(section.Title));
         }
     }
 

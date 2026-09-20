@@ -11,32 +11,32 @@ public class RulesViewModel
     {
         new MathSection
         {
-            Title = "Арифметика", Subtitle = "1–6 класс", RuleCount = 84,
+            Title = "Арифметика", Subtitle = "84 правила", RuleCount = 84,
             Background = G("GradIndigo"), Offset = new Thickness(0, 0, 44, 0)
         },
         new MathSection
         {
-            Title = "Алгебра", Subtitle = "7–11 класс", RuleCount = 146,
+            Title = "Алгебра", Subtitle = "146 правил", RuleCount = 146,
             Background = G("GradFire"), Offset = new Thickness(36, -26, 0, 0)
         },
         new MathSection
         {
-            Title = "Геометрия", Subtitle = "7–11 класс", RuleCount = 118,
+            Title = "Геометрия", Subtitle = "118 правил", RuleCount = 118,
             Background = G("GradMagenta"), Offset = new Thickness(0, -26, 44, 0)
         },
         new MathSection
         {
-            Title = "Тригонометрия", Subtitle = "9–11 класс", RuleCount = 62,
+            Title = "Тригонометрия", Subtitle = "62 правила", RuleCount = 62,
             Background = G("GradGold"), Offset = new Thickness(36, -26, 0, 0)
         },
         new MathSection
         {
-            Title = "Функции и графики", Subtitle = "7–11 класс", RuleCount = 73,
+            Title = "Функции и графики", Subtitle = "73 правила", RuleCount = 73,
             Background = G("GradTeal"), Offset = new Thickness(0, -26, 44, 0)
         },
         new MathSection
         {
-            Title = "Начала анализа", Subtitle = "10–11 класс", RuleCount = 55,
+            Title = "Начала анализа", Subtitle = "55 правил", RuleCount = 55,
             Background = G("GradNight"), Offset = new Thickness(36, -26, 0, 0)
         },
     };

@@ -16,25 +16,25 @@ public class HomeViewModel
         {
             Title = "Формулы сокращённого умножения",
             Section = "Алгебра", SectionColor = Color.FromArgb("#4F5BD5"),
-            Meta = "7 класс · 12 формул", Progress = 0.6
+            Meta = "12 формул", Progress = 0.6
         },
         new RuleCard
         {
             Title = "Признаки равенства треугольников",
             Section = "Геометрия", SectionColor = Color.FromArgb("#F0453C"),
-            Meta = "7 класс · 3 признака", Progress = 0.35
+            Meta = "3 признака", Progress = 0.35
         },
         new RuleCard
         {
             Title = "Основные тригонометрические тождества",
             Section = "Тригонометрия", SectionColor = Color.FromArgb("#B93EC9"),
-            Meta = "10 класс · 9 формул", Progress = 0.8
+            Meta = "9 формул", Progress = 0.8
         },
         new RuleCard
         {
             Title = "Действия с обыкновенными дробями",
             Section = "Арифметика", SectionColor = Color.FromArgb("#C09257"),
-            Meta = "5 класс · 6 правил", Progress = 1.0
+            Meta = "6 правил", Progress = 1.0
         },
     };
 
@@ -46,6 +46,4 @@ public class HomeViewModel
         new SectionChip { Title = "Тригонометрия", Background = (Brush)Application.Current!.Resources["GradGold"] },
     };
 
-    public ObservableCollection<GradeItem> Grades { get; } = new(
-        Enumerable.Range(1, 11).Select(n => new GradeItem { Number = n, IsSelected = n == 7 }));
 }

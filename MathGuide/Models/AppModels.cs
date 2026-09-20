@@ -28,16 +28,6 @@ public class RuleCard
     public double Progress { get; set; }
 }
 
-/// <summary>Класс школы (1–11) для горизонтальной ленты.</summary>
-public class GradeItem
-{
-    public int Number { get; set; }
-    public string Label => Number.ToString();
-    public bool IsSelected { get; set; }
-    public Color Background => IsSelected ? Color.FromArgb("#4F5BD5") : Color.FromArgb("#FFFFFF");
-    public Color TextColor => IsSelected ? Colors.White : Color.FromArgb("#5A5A75");
-}
-
 /// <summary>Часто задаваемый вопрос на странице калькулятора.</summary>
 public class FaqItem
 {

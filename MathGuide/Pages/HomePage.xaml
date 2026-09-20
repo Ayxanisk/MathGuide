@@ -160,34 +160,6 @@
                     </FlexLayout>
                 </VerticalStackLayout>
 
-                <!-- Классы 1–11 -->
-                <VerticalStackLayout Spacing="12">
-                    <Label Style="{StaticResource SectionTitle}" Text="Класс" />
-
-                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                        <HorizontalStackLayout Spacing="9" Padding="0,2,0,6"
-                                               BindableLayout.ItemsSource="{Binding Grades}">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate x:DataType="m:GradeItem">
-                                    <Border WidthRequest="46" HeightRequest="46" Padding="0"
-                                            StrokeThickness="1" Stroke="{StaticResource Stroke}"
-                                            BackgroundColor="{Binding Background}">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="23" />
-                                        </Border.StrokeShape>
-                                        <Border.Shadow>
-                                            <Shadow Brush="#16162B" Offset="0,3" Radius="8" Opacity="0.06" />
-                                        </Border.Shadow>
-                                        <Label Text="{Binding Label}" FontSize="15" FontAttributes="Bold"
-                                               TextColor="{Binding TextColor}"
-                                               HorizontalOptions="Center" VerticalOptions="Center" />
-                                    </Border>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </HorizontalStackLayout>
-                    </ScrollView>
-                </VerticalStackLayout>
-
             </VerticalStackLayout>
         </ScrollView>
     </Grid>
