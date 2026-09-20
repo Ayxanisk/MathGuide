@@ -3,6 +3,7 @@ using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MathGuide.Models;
+using MathGuide.Services;
 
 namespace MathGuide.ViewModels;
 
@@ -10,14 +11,14 @@ public partial class RulesListViewModel : ObservableObject
 {
     private static readonly IReadOnlyList<MathRule> AllRules =
     [
-        new MathRule { Subject = "Арифметика", Title = "Действия с дробями", Description = "Сложение, вычитание, умножение и деление обыкновенных дробей.", PdfFileName = "arithmetic_fractions.pdf" },
-        new MathRule { Subject = "Арифметика", Title = "Проценты", Description = "Основные правила вычисления процентов и процентных изменений.", PdfFileName = "arithmetic_percentages.pdf" },
-        new MathRule { Subject = "Алгебра", Title = "Формулы сокращённого умножения", Description = "Квадрат суммы, квадрат разности и разность квадратов.", PdfFileName = "algebra_short_multiplication.pdf" },
-        new MathRule { Subject = "Алгебра", Title = "Квадратные уравнения", Description = "Дискриминант, корни и теорема Виета.", PdfFileName = "algebra_quadratic_equations.pdf" },
-        new MathRule { Subject = "Геометрия", Title = "Признаки равенства треугольников", Description = "Три основных признака равенства треугольников.", PdfFileName = "geometry_triangles.pdf" },
-        new MathRule { Subject = "Тригонометрия", Title = "Основные тождества", Description = "Базовые тригонометрические тождества и их применение.", PdfFileName = "trigonometry_identities.pdf" },
-        new MathRule { Subject = "Функции и графики", Title = "Линейная функция", Description = "График, коэффициенты и свойства линейной функции.", PdfFileName = "functions_linear.pdf" },
-        new MathRule { Subject = "Начала анализа", Title = "Производная функции", Description = "Определение производной и таблица основных производных.", PdfFileName = "analysis_derivative.pdf" }
+        new MathRule { Subject = "Арифметика", Title = "Действия с дробями", Description = "Сложение, вычитание, умножение и деление обыкновенных дробей.", PdfFileName = "rule1.pdf" },
+        new MathRule { Subject = "Арифметика", Title = "Проценты", Description = "Основные правила вычисления процентов и процентных изменений.", PdfFileName = "rule2.pdf" },
+        new MathRule { Subject = "Алгебра", Title = "Формулы сокращённого умножения", Description = "Квадрат суммы, квадрат разности и разность квадратов.", PdfFileName = "rule3.pdf" },
+        new MathRule { Subject = "Алгебра", Title = "Квадратные уравнения", Description = "Дискриминант, корни и теорема Виета.", PdfFileName = "rule4.pdf" },
+        new MathRule { Subject = "Геометрия", Title = "Признаки равенства треугольников", Description = "Три основных признака равенства треугольников.", PdfFileName = "rule1.pdf" },
+        new MathRule { Subject = "Тригонометрия", Title = "Основные тождества", Description = "Базовые тригонометрические тождества и их применение.", PdfFileName = "rule2.pdf" },
+        new MathRule { Subject = "Функции и графики", Title = "Линейная функция", Description = "График, коэффициенты и свойства линейной функции.", PdfFileName = "rule3.pdf" },
+        new MathRule { Subject = "Начала анализа", Title = "Производная функции", Description = "Определение производной и таблица основных производных.", PdfFileName = "rule4.pdf" }
     ];
 
     public ObservableCollection<MathRule> Rules { get; } = new()
@@ -36,6 +37,8 @@ public partial class RulesListViewModel : ObservableObject
         }
     }
 
+    private readonly PdfManagerService _pdfManager = new();
+
     [RelayCommand]
     private async Task OpenPdfAsync(string fileName)
     {
@@ -45,11 +48,7 @@ public partial class RulesListViewModel : ObservableObject
         try
         {
             var safeFileName = Path.GetFileName(fileName);
-            var cachedFilePath = Path.Combine(FileSystem.CacheDirectory, safeFileName);
-
-            await using var source = await FileSystem.OpenAppPackageFileAsync(safeFileName);
-            await using var destination = File.Create(cachedFilePath);
-            await source.CopyToAsync(destination);
+            var cachedFilePath = await _pdfManager.GetPdfFilePathAsync(safeFileName);
 
             var opened = await Launcher.Default.OpenAsync(
                 new OpenFileRequest(Path.GetFileName(cachedFilePath), new ReadOnlyFile(cachedFilePath)));

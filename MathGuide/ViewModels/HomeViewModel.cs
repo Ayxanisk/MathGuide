@@ -1,11 +1,12 @@
 using System.Collections.ObjectModel;
 using MathGuide.Models;
+using MathGuide.Services;
 
 namespace MathGuide.ViewModels;
 
 public class HomeViewModel
 {
-    public string UserName { get; } = "Айхан";
+    public string UserName => UserSession.IsAuthenticated ? UserSession.Name : "Айхан";
     public int Points { get; } = 300;
     public int WeeklyGoal { get; } = 500;
     public int NewTopicsCount { get; } = 4;
