@@ -20,8 +20,17 @@ public partial class LoginPage : ContentPage
             return;
         }
 
-        UserSession.SignIn(login, login);
-        await DisplayAlert("Вход выполнен", $"Демо-вход: {login}", "Отлично");
+        try
+        {
+            await UserSession.SignInAsync(login, password);
+        }
+        catch (Exception exception)
+        {
+            await DisplayAlert("Не удалось войти", exception.Message, "Ок");
+            return;
+        }
+
+        await DisplayAlert("Вход выполнен", $"Привет, {UserSession.Name}!", "Отлично");
         await Navigation.PopModalAsync();
         await Navigation.PushModalAsync(new ProfilePage());
     }

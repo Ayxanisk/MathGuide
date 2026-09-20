@@ -18,7 +18,7 @@ public partial class RegisterPage : ContentPage
 
         if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(contact) || string.IsNullOrWhiteSpace(password))
         {
-            await DisplayAlert("Проверь поля", "Заполни имя, email или телефон и пароль.", "Ок");
+            await DisplayAlert("Проверь поля", "Заполни имя, email и пароль.", "Ок");
             return;
         }
 
@@ -28,8 +28,16 @@ public partial class RegisterPage : ContentPage
             return;
         }
 
-        UserSession.SignIn(name, contact);
-        await UserSession.SetPasswordAsync(password);
+        try
+        {
+            await UserSession.RegisterAsync(name, contact, password);
+        }
+        catch (Exception exception)
+        {
+            await DisplayAlert("Не удалось зарегистрироваться", exception.Message, "Ок");
+            return;
+        }
+
         await DisplayAlert("Готово", $"Демо-регистрация: {name}", "Отлично");
 
         // Закрываем и регистрацию, и страницу входа под ней — возвращаемся в приложение.

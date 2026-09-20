@@ -1,6 +1,7 @@
 using MathGuide.Pages;
 using MathGuide.Services;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.OCR;
 
 namespace MathGuide;
 
@@ -12,6 +13,7 @@ public static class MauiProgram
 
         builder
             .UseMauiApp<App>()
+            .UseOcr()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -19,7 +21,8 @@ public static class MauiProgram
             });
 
         // Сервисы
-        builder.Services.AddSingleton<ISolverService, DemoSolverService>();
+        builder.Services.AddSingleton<ISolverService, PhotoMathSolverService>();
+        builder.Services.AddSingleton<PdfManagerService>();
 
         // Страницы
         builder.Services.AddTransient<HomePage>();

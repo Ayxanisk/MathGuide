@@ -27,7 +27,7 @@ public partial class ProfilePage : ContentPage
         await using var target = File.Create(targetPath);
         await source.CopyToAsync(target);
 
-        UserSession.SetAvatarPath(targetPath);
+        await UserSession.SetAvatarPathAsync(targetPath);
         AvatarImage.Source = targetPath;
     }
 
@@ -41,7 +41,15 @@ public partial class ProfilePage : ContentPage
             return;
         }
 
-        UserSession.UpdateProfile(name, email);
+        try
+        {
+            await UserSession.UpdateProfileAsync(name, email);
+        }
+        catch (Exception exception)
+        {
+            await DisplayAlert("Не удалось сохранить", exception.Message, "Ок");
+            return;
+        }
         await DisplayAlert("Сохранено", "Данные профиля обновлены.", "Ок");
     }
 
@@ -60,7 +68,15 @@ public partial class ProfilePage : ContentPage
             return;
         }
 
-        await UserSession.SetPasswordAsync(password);
+        try
+        {
+            await UserSession.SetPasswordAsync(password);
+        }
+        catch (Exception exception)
+        {
+            await DisplayAlert("Не удалось изменить пароль", exception.Message, "Ок");
+            return;
+        }
         PasswordEntry.Text = string.Empty;
         ConfirmPasswordEntry.Text = string.Empty;
         await DisplayAlert("Сохранено", "Пароль успешно изменён.", "Ок");

@@ -11,6 +11,12 @@ public partial class HomePage : ContentPage
         BindingContext = new HomeViewModel();
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        BindingContext = new HomeViewModel();
+    }
+
     private async void OnSolveTapped(object sender, TappedEventArgs e)
         => await Shell.Current.GoToAsync("//calc");
 

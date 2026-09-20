@@ -1,5 +1,6 @@
 using MathGuide.Models;
 using MathGuide.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MathGuide.Pages;
 
@@ -22,8 +23,12 @@ public partial class CalculatorPage : ContentPage
         BindingContext = this;
     }
 
-    // Конструктор без параметров нужен, если страница создаётся из Shell DataTemplate
-    public CalculatorPage() : this(new DemoSolverService()) { }
+    // Shell создаёт страницу из DataTemplate без DI-параметров.
+    public CalculatorPage() : this(
+        Application.Current?.Handler?.MauiContext?.Services.GetService<ISolverService>()
+        ?? new DemoSolverService())
+    {
+    }
 
     private async void OnSolveText(object? sender, EventArgs e)
     {
